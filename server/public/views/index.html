@@ -8,14 +8,17 @@
 <body>
   <div ng-controller="IndexController">
     <h1>&Omicron; Angular!</h1>
-    <p>Name: <input type="text" ng-model="firstname" /> </p>
-    <p>{{lastname}}, {{firstname}}</p>
 
+    <p>Count: {{people.length}}</p>
+    <div ng-if="people.length < 5">
+      <button ng-click="addPerson()">Add Person</button>
+    </div>
+    <button ng-click="people.shift()">Remove Person</button>
 
-  {{firstname}}
-  {{firstname}}
-  {{firstname}}
-  {{firstname}}
+    <div ng-repeat="person in people" style="border: 1px solid red;">
+      <p>{{person.firstname}}</p>
+      <p>{{person.lastname}}</p>
+    </div>
 
   </div>
 
