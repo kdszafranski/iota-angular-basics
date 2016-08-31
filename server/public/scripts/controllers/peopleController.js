@@ -6,34 +6,26 @@ myApp.controller('PeopleController', ['$scope', 'DataFactory', function($scope, 
     $scope.message = 'People!';
     $scope.formName = '';
 
+    // tell the factory to get data from the DB so we can use it
     if($scope.dataFactory.peopleData() === undefined) {
-      // initial load
+      console.log('factory has no data, getting it now.');
       $scope.dataFactory.retrieveData().then(function() {
-          $scope.people = $scope.dataFactory.peopleData();
+        $scope.people = $scope.dataFactory.peopleData();
       });
     } else {
       $scope.people = $scope.dataFactory.peopleData();
     }
 
+    console.log('this happens now!');
+
     // Adds a person to the DB and then refresh our data from the factory
     $scope.addPerson = function() {
-      $scope.dataFactory.addName($scope.formName).then(function(response) {
-        console.log('get the data again');
+      console.log('adding a person....');
+      $scope.dataFactory.addName($scope.formName).then(function(response) {        
         $scope.people = $scope.dataFactory.peopleData();
-        // response returned from the addName data function
-        // if(response == 201) {
-        //   // ask the factory to refresh its data
-        //   $scope.dataFactory.retrieveData().then(function() {
-        //     console.log('refreshed data complete');
-        //     $scope.people = $scope.dataFactory.peopleData();
-        //   });
-        // } else {
-        //   console.log("error posting new name");
-        // }
       });
-      console.log('waiting to post....');
-
-      $scope.formName = '';
     }
+
+    console.log('when does this run?');
 
 }]);

@@ -5,15 +5,14 @@ myApp.controller('AddressController', ['$scope', 'DataFactory', function($scope,
     $scope.message = 'Addresses!';
     $scope.people = [];
 
+    // tell the factory to get data from the DB so we can use it
     if($scope.dataFactory.peopleData() === undefined) {
-        // initial load
-        console.log("getting data from factory...");
-        $scope.dataFactory.retrieveData().then(function() {
-            $scope.people = $scope.dataFactory.peopleData();
-        });
-    } else {
-        console.log('factory has data!');
+      console.log('factory has no data, getting it now.');
+      $scope.dataFactory.retrieveData().then(function() {
         $scope.people = $scope.dataFactory.peopleData();
+      });
+    } else {
+      $scope.people = $scope.dataFactory.peopleData();
     }
 
 }]);
