@@ -5,27 +5,38 @@ var connect = require('../modules/connection');
 
 
 router.get('/', function(req, res) {
-    var results = [];
+  var results = [];
 
-    pg.connect(connect, function(err, client, done) {
-        var query = client.query('SELECT * FROM people');
-
-          // Stream results back one row at a time
-          query.on('row', function(row) {
-              results.push(row);
-          });
-
-          // close connection
-          query.on('end', function() {
-            done();
-            res.json(results);
-          });
-
-          if(err) {
-              console.log(err);
-          }
+  pg.connect(connect, function(err, client, done) {
+    client.query('SELECT * FROM people',
+    function(err, result) {
+      done();
+      if(err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.send(result.rows);
+      }
     });
+  });
 });
 
+router.post('/', function(req, res) {
+  var person = req.body.name;
+  pg.connect(connect, function(err, client, done) {
+    client.query('INSERT INTO people (name) ' +
+    'VALUES ($1)',
+    [person],
+    function(err, result) {
+      done();
+      if(err) {
+        console.log(err);
+        res.sendStatus(500);
+      } else {
+        res.sendStatus(201);
+      }
+    });
+  })
+});
 
 module.exports = router;

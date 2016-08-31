@@ -3,17 +3,23 @@ myApp.factory('DataFactory', ['$http', function($http) {
     var people = undefined;
 
     var getData = function() {
-        console.log('getting data from server');
+        console.log('DF getting data from server');
         var promise = $http.get('/data').then(function(response) {
             people = response.data;
-            console.log('Async data response:', people);
+            console.log('DF Async data response:', people);
         });
 
         return promise;
     };
 
     var addPerson = function(name) {
-        people.push(name);
+      var promise = $http.post('/data', {name: name}).then(function(response) {
+        console.log('DF post completed');
+        // done, now refersh out data from the DB
+        return getData();
+      });
+
+      return promise;
     };
 
 
@@ -26,7 +32,7 @@ myApp.factory('DataFactory', ['$http', function($http) {
             return getData();
         },
         addName: function(name) {
-            addPerson(name);
+            return addPerson(name);
         }
     };
 
