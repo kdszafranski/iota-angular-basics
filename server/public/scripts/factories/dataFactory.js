@@ -25,15 +25,15 @@ myApp.factory('DataFactory', ['$http', function($http) {
 
     //PUBLIC
     var publicApi = {
-        peopleData: function() {
-            return people;
-        },
-        retrieveData: function() {
-            return getData();
-        },
-        addName: function(name) {
-            return addPerson(name);
-        }
+      peopleData: function() {
+          return people;
+      },
+      retrieveData: function() {
+          return getData();
+      },
+      addName: function(name) {
+          return addPerson(name);
+      }
     };
 
     return publicApi;
