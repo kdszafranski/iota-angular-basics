@@ -21,10 +21,13 @@ myApp.controller('PeopleController', ['$scope', 'DataFactory', function($scope, 
     // Adds a person to the DB and then refresh our data from the factory
     $scope.addPerson = function() {
       console.log('adding a person....');
-      $scope.dataFactory.addName($scope.formName).then(function(response) {        
+      $scope.dataFactory.addName($scope.formName).then(function(response) {
         $scope.people = $scope.dataFactory.peopleData();
       });
+
+      $scope.formName = '';
     }
+
 
     console.log('when does this run?');
 
