@@ -1,6 +1,6 @@
-myApp.controller('HomeController', ['$scope', function($scope) {
-    $scope.message = 'Home Controller!';
+myApp.controller('HomeController', function() {
+  var self = this;
+  self.message = 'Home Controller!';
 
-    console.log('Home Controller');
-
-}]);
+  console.log('Home Controller');
+});

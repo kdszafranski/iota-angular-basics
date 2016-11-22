@@ -1,5 +1,6 @@
-myApp.controller('AnotherController', ['$scope', function($scope) {
-    $scope.message = 'Another Controller!';
+myApp.controller('AnotherController', function() {
+  var self = this;
+  self.message = 'Another Controller!';
 
-    console.log('Another Controller');
-}]);
+  console.log('Another Controller');
+});
