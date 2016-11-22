@@ -6,10 +6,7 @@ var path = require('path');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-// Serve back static files
-app.use(express.static(path.join(__dirname, './public')));
-
-// Routes
+// Useless Routes
 app.get('/data', function(req, res) {
     res.send({message: 'hello'});
 });
@@ -17,6 +14,9 @@ app.get('/data', function(req, res) {
 app.post('/data/:number', function(req, res) {
     res.send(req.params.number);
 });
+
+// Serve back static files
+app.use(express.static(path.resolve('./server/public')));
 
 // Handle index file separately
 app.get('/', function(req, res) {
